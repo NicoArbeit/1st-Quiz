@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz-Spiel mit Bildern</title>
+ <style>
+ 
+        body {
+            font-family: Arial, sans-serif;
+            background-color:white;
+            margin: 55px;
+            padding: 0;
+			background-image: url('Shrek Swamp.jpg');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+            
+            
+    
+		   
+	  
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto ;
+            padding: 25px;
+            background-color:orange;
+            border-radius: 13px;
+            box-shadow: 2px 2px 2px;
+			border: solid Black 1px;
+        }
+
+        h1 {
+            text-align: center;
+            color: black;
+	    text-shadow: 2px 2px 3px #555;
+	  
+        }
+
+       
+        
+
+        #question {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .btn-grid {
+            
+
+        
+		background-color:red;
+		border-radius:10px;
+		border:2px solid black;
+		display:inline-block;
+		cursor:pointer;
+		color:blue;
+		font-family:Arial;
+		font-size:17px;
+		padding:16px 31px;
+		text-decoration:none;
+		text-shadow:1px 1px 1px #2f6627;
+		}
+
+        
+
+        .btn {
+           
+            padding: 10px;
+            text-align: center;
+            background-color: Black;
+            color: rgb(0, 150, 255);
+            border: solid;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.5s;
+        }
+
+        .btn:hover {
+           background-color:rgb(0, 0, 100);
+        }
+
+        #feedback {
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+            color:red;
+        }
+		
+		
+		
+    </style>
+
+</head> 
+
+<input type="button" class="btn btn-lg btn-success" onclick="location.href='file:///D:/QuizBG/Index.html';" value="Home" />
+
+
+<body>
+	
+	
+     <
+	
+	<div class="container">
+        <h1>Quiz-Spiel</h1>
+        <img id="question-image"  alt="Fragebild" width=50% height=50%>
+        <div id="question"></div>
+        <div id="answer-buttons" class="btn-grid" >
+		
+		
+		
+            <!-- Antwortbuttons werden hier eingefügt -->
+		
+		
+
+        </div>
+        <div id="feedback"></div>
+    </div>
+    <script>
+        const questions = [
+            { question: "Was ist das Bürgergeld?", answers: ["Eine Steuererleichterung", "Eine Sozialleistung", "Ein Bildungsgutschein", "Ein Lotteriegewinn"], correct: "Eine Sozialleistung", image: "img/BG.jpg" },
+            { question: "Zu welchem Zweck wurde das Bürgergeld eingeführt?", answers: ["Um Wahlen zu gewinnen", "Um die Wirtschaft zu stärken", "Um soziale Ungleichheit zu verringern", "Um den Tourismus zu fördern"], correct: "Um soziale Ungleichheit zu verringern", image: "img/BG.jpg" },
+            { question: "Wer hat Anspruch auf Bürgergeld?", answers: ["Nur Rentner", "Nur Erwachsene über 18 Jahre", "Personen in finanzieller Not", "Alle Staatsbürger automatisch"], correct: "Personen in finanzieller Not", image: "img/BG.jpg" },
+			{ question: "In welchem Land wurde das Bürgergeld eingeführt?", answers: ["USA", "Deutschland", "Japan", "Kanada"], correct: "Deutschland", image: "img/BG.jpg" },
+			{ question: "Wie oft wird das Bürgergeld ausgezahlt?", answers: ["Wöchentlich", "Monatlich", "Jährlich", "Einmalig"], correct: "Monatlich", image: "img/BG.jpg" },
+			{ question: "Was soll durch das Bürgergeld vereinfacht werden?", answers: ["Die Steuererklärung", "Die Arbeitsplatzsuche", "Der Sozialhilfeempfang", "Das Reisen ins Ausland"], correct: "Die Arbeitsplatzsuche", image: "img/BG.jpg" },
+		    { question: "Was könnte eine Folge des Bürgergeldes sein?", answers: ["Höhere Schulden für den Staat", "Weniger private Investitionen", "Erhöhte Lebenshaltungskosten", "All das oben Genannte"], correct: "Weniger private Investitionen", image: "img/BG.jpg" },
+		    { question: "Wie beeinflusst das Bürgergeld die Motivation zur Arbeitssuche?", answers: ["Es ändert die Art der gesuchten Arbeit", "Es hat keinen Einfluss", "Es verringert die Motivation", "Es erhöht die Motivation"], correct: "Es erhöht die Motivation", image: "img/BG.jpg" },
+		    { question: "Welche Behörde ist hauptsächlich für die Verwaltung des Bürgergeldes zuständig?", answers: ["Das Finanzamt", "Das Arbeitsamt", "Das Sozialministerium", "Die Stadtverwaltung"], correct: "Das Arbeitsamt", image: "img/BG.jpg" },
+		    { question: "Was ist eine Voraussetzung für den Erhalt von Bürgergeld??", answers: ["Ein Mindestalter von 16 Jahren", "Ein bestandener Eignungstest", "Der Nachweis der Bedürftigkeit", "Eine gültige Fahrerlaubnis"], correct: "Ein Mindestalter von 16 Jahren", image: "img/BG.jpg" },
+		    { question: "Was passiert, wenn jemand, der Bürgergeld erhält, einen Job findet?", answers: ["Das Bürgergeld wird sofort gestrichen", "Das Bürgergeld wird schrittweise reduziert", "Das Bürgergeld bleibt unverändert", "Das Bürgergeld wird verdoppelt"], correct: "Das Bürgergeld wird sofort gestrichen", image: "img/BG.jpg" },
+		    { question: "Kann das Bürgergeld mit anderen Sozialleistungen kombiniert werden?", answers: ["Ja, ohne Einschränkungen", "Nur mit speziellen Genehmigungen", "Nein, es ist nicht erlaubt", "Ja, aber es wird dann reduziert"], correct: "Nur mit speziellen Genehmigungen", image: "img/BG.jpg" },
+		    { question: "Welches Ziel verfolgt das Bürgergeld primär?", answers: ["Bildung fördern", "Gesundheitsversorgung verbessern", "Soziale Sicherheit gewährleisten", "Kulturelle Projekte unterstützen"], correct: "Soziale Sicherheit gewährleisten", image: "img/BG.jpg" },
+		    { question: "Wie wird das Bürgergeld finanziert?", answers: ["Durch Lotterieeinnahmen", "Durch Steuergelder", "Durch private Spenden", "Durch internationale Hilfsgelder"], correct: "Durch Steuergelder", image: "img/BG.jpg" },
+			{ question: "Was ist ein möglicher Kritikpunkt am Bürgergeld?", answers: ["Es fördert die Abhängigkeit von staatlicher Hilfe", "Es ist zu kompliziert zu beantragen", "Es ist nicht nachhaltig finanziert", "Alle oben genannten Punkte"], correct: "Alle oben genannten Punkte", image: "img/BG.jpg" }	   
+			
+			
+			
+			
+			
+        ];
+        let currentQuestionIndex = 0;
+
+        function displayQuestion() {
+            const question = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = question.question;
+            document.getElementById('question-image').src = question.image;
+            const buttonsContainer = document.getElementById('answer-buttons');
+            buttonsContainer.innerHTML = '';
+            question.answers.forEach(answer => {
+                const button = document.createElement('button');
+                button.textContent = answer;
+                button.addEventListener('click', () => checkAnswer(answer));
+                buttonsContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(answer) {
+            const question = questions[currentQuestionIndex];
+            if (answer === question.correct) {
+                document.getElementById('feedback').textContent = "Richtig!";
+                document.getElementById('feedback').style.color = 'green';
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                } else {
+                    document.getElementById('feedback').textContent = "Glückwunsch! Du hast alle Fragen beantwortet.";
+                }
+            } else {
+                document.getElementById('feedback').textContent = "Falsch. Versuche es noch einmal!";
+                document.getElementById('feedback').style.color = 'red';
+            }
+        }
+
+        displayQuestion();
+    </script>
+
+
+
+
+
+
+</body>
+</html>
