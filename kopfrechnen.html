@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    
+	
+	<title>Kopfrechnen Trainer</title>
+    <a href="index.html"> 
+	<input type="button" class="btn btn-lg btn-success" onclick="/index.html';" value="Home" />
+		</a>
+	<style>
+	
+
+body {
+            
+            background-color:white;
+			background-image: url('Kopf Bild.jpg');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;}
+
+.btn {
+           
+            padding: 10px;
+            text-align: center;
+            background-color: Black;
+            color: rgb(0, 150, 255);
+            border: solid;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.5s;}
+
+
+#score {font-size: 19px;
+		text-align: center;
+        absolute;          
+		color:green;}
+
+
+#timer{ 
+
+		text-align: center;
+        absolute;           
+		margin: 5px;
+		font-family:arial;
+		font-size:18px;
+		color:red}
+
+#answer{
+		margin-left: 37%;
+		absolute;      
+		background-color:silver;
+		border-radius:10px;
+		border:2px solid black;
+		cursor:pointer;
+		color:blue;
+		font-family:Arial;
+		font-size:16px;
+		padding:10px 10px;
+		
+		
+		}
+
+ #problem {	
+ 
+			text-align:center;
+			absolute;
+            font-size: 23px;
+            color: black;}
+
+ h1 {
+            text-align: center;
+		absolute;
+            color: black;
+	    text-shadow: 1px 1px 1px #555;}
+
+
+.game-container {
+	
+            max-width: 50%;
+            margin: auto ;
+            padding: 20px;
+            background-color:DeepSkyBlue;
+            border-radius: 150px;
+            box-shadow: 1px 1px 1px;
+			border: solid white 3px;
+			
+        }
+
+
+	</style>
+</head>
+<body>
+
+
+
+
+
+    <div class="game-container">
+        <h1>Kopfrechnen Trainer</h1>
+        <div id="score">Richtige Antworten: 0</div>
+        <div id="problem" class="problem"></div>
+        <input type="number" id="answer" placeholder="Deine Antwort" autofocus>
+        <div id="timer">Verbleibende Zeit: 5s</div>
+    </div>
+    <script>
+let timeout;
+let score = 0;
+
+function generateProblem() {
+    const num1 = Math.floor(Math.random() * 100);
+    const num2 = Math.floor(Math.random() * 100);
+    const operation = ['+', '-'][Math.floor(Math.random() * 2)];
+    const problem = `${num1} ${operation} ${num2}`;
+    document.getElementById('problem').textContent = problem;
+    document.getElementById('answer').value = '';
+    document.getElementById('answer').focus();
+
+    resetTimer();
+}
+
+function resetTimer() {
+    clearTimeout(timeout);
+    let timeLeft = 8; // Startzeit des Timers
+    document.getElementById('timer').textContent = `Verbleibende Zeit: ${timeLeft}s`;
+    timeout = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = `Verbleibende Zeit: ${timeLeft}s`;
+        if (timeLeft === 0) {
+            clearInterval(timeout);
+            checkAnswer();
+        }
+    }, 1000);
+}
+
+function checkAnswer() {
+    const userAnswer = parseFloat(document.getElementById('answer').value);
+    const correctAnswer = eval(document.getElementById('problem').textContent);
+
+    if (isNaN(userAnswer)) { // Keine Antwort eingegeben
+        gameOver("Bitte eine Antwort eingeben!");
+    } else if (userAnswer === correctAnswer) {
+        score++;
+        document.getElementById('score').textContent = `Richtige Antworten: ${score}`;
+        generateProblem();
+    } else {
+        gameOver("Falsche Antwort. Spiel beendet.");
+    }
+}
+
+function gameOver(message) {
+    alert(message + " Deine Punktzahl: " + score);
+    document.getElementById('answer').setAttribute("disabled", true);
+}
+
+generateProblem(); // Erzeugt die erste Aufgabe beim Laden
+
+
+	</script>
+</body>
+</html>
